@@ -1,0 +1,26 @@
+{
+  "name": "homebridge-icomfort",
+  "version": "0.0.1",
+  "description": "Lennox iComfort plugin for Homebridge",
+  "keywords": [
+    "homebridge-plugin",
+    "iComfort"
+  ],
+  "license": "MIT",
+  "author": "Paul DeMarco <pdemarco925@comcast.net>",
+  "dependencies": {
+    "icomfort": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=4.3.2",
+    "homebridge": ">=0.4.20"
+  },
+  "dependencies" : {
+    "icomfort": ">=1.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdemarco925/homebridge-icomfort.git"
+  }
+}
+
