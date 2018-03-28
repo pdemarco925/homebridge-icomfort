@@ -1,6 +1,6 @@
 {
   "name": "homebridge-icomfort",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Lennox iComfort plugin for Homebridge",
   "keywords": [
     "homebridge-plugin",
