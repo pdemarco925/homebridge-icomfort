@@ -1,3 +1,7 @@
+[![view on npm](http://img.shields.io/npm/v/homebridge-icomfort.svg)](https://www.npmjs.org/package/homebridge-icomfort)
+[![npm module downloads](http://img.shields.io/npm/dt/homebridge-icomfort.svg)](https://www.npmjs.org/package/homebridge-icomfort)
+
+
 # homebridge-icomfort
 
 This is a plugin for [homebridge](https://github.com/nfarina/homebridge) for the Lennox iComfort Thermostat implemented in Java Script.
