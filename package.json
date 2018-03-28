@@ -9,7 +9,7 @@
   "license": "MIT",
   "author": "Paul DeMarco <pdemarco925@comcast.net>",
   "dependencies": {
-    "icomfort": "^1.2.0"
+    "icomfort": "^1.3.0"
   },
   "engines": {
     "node": ">=4.3.2",
