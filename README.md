@@ -6,6 +6,8 @@
 
 This is a plugin for [homebridge](https://github.com/nfarina/homebridge) for the Lennox iComfort Thermostat implemented in Java Script.
 
+Update 7/9/2020: Version 2.0.0
+- Temperature rounding fixes, code cleanup and some other minor bug fixes.
 Update 3/27/2018: Version 1.0.0
 - Added support for zones. Added an optional zoneNumber parameter (defaults to 0 for single zone systems). For multi-zone systems just add another configuration with a unique name and zoneNumber.
 - Deprecated Program Mode setting. Lennox changed their interface and it no longer works. Switching modes (OFF, COOL, HEAT, AUTO) will only work in manual mode and not in program / schedule  mode.
