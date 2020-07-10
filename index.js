@@ -73,14 +73,14 @@ Thermostat.prototype = {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
-                if (currentSettings.Away_Mode === 0) {
-                  this.awayMode = 0;
-                } else if (currentSettings.Away_Mode === 1) {
-                  this.awayMode = 1;
-                }
-                this.log("getAwayMode:" + this.awayMode);
-                callback(null, this.awayMode);
-                });
+                    if (currentSettings.Away_Mode === 0) {
+                      this.awayMode = 0;
+                    } else if (currentSettings.Away_Mode === 1) {
+                      this.awayMode = 1;
+                    }
+                    this.log("getAwayMode:" + this.awayMode);
+                    callback(null, this.awayMode);
+                  });
 	},
 	setAwayMode: function(value, callback) {
 		var newOptions;
@@ -88,175 +88,170 @@ Thermostat.prototype = {
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
 
-        	const currentAwayMode = {
-	            'awaymode': currentSettings.Away_Mode,
-	            'coolsetpoint': currentSettings.Cool_Set_Point,
-	            'fanmode': currentSettings.Fan_Mode,
-	            'gatewaysn': currentSettings.GatewaySN,
-	            'heatsetpoint': currentSettings.Heat_Set_Point,
-	            'zonenumber': currentSettings.Zone_Number
-	       	};
+        	    const currentAwayMode = {
+	              'awaymode': currentSettings.Away_Mode,
+	              'coolsetpoint': currentSettings.Cool_Set_Point,
+	              'fanmode': currentSettings.Fan_Mode,
+	              'gatewaysn': currentSettings.GatewaySN,
+	              'heatsetpoint': currentSettings.Heat_Set_Point,
+	              'zonenumber': currentSettings.Zone_Number
+	       	    };
 
-                if (value === false) {
-                  newOptions = {
-                    'awaymode': 0 
-                  };
-                } else if (value === true) {
-                  newOptions = {
-                    'awaymode': 1
-                  };
-                }
+                    if (value === false) {
+                      newOptions = {
+                        'awaymode': 0 
+                      };
+                    } else if (value === true) {
+                      newOptions = {
+                        'awaymode': 1
+                      };
+                    }
 
-	        const newSettings = Object.assign({}, currentAwayMode, newOptions);
-	        this.icomfort.setAwayMode(newSettings);
-		this.log("setAwayMode: " + newSettings.awaymode);
-		callback(null);
-		});
+	            const newSettings = Object.assign({}, currentAwayMode, newOptions);
+	            this.icomfort.setAwayMode(newSettings);
+		    this.log("setAwayMode: " + newSettings.awaymode);
+		    callback(null);
+		  });
 	},
 	// Required Characteristics
 	getCurrentHeatingCoolingState: function(callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
-	        if (currentSettings.System_Status === 0) {
-	          this.currentHeatingCoolingState = Characteristic.CurrentHeatingCoolingState.OFF;
-	        } else if (currentSettings.System_Status === 1) {
-	          this.currentHeatingCoolingState = Characteristic.CurrentHeatingCoolingState.HEAT;
-	        } else if (currentSettings.System_Status === 2) {
-	          this.currentHeatingCoolingState = Characteristic.CurrentHeatingCoolingState.COOL;
-	        }
-                this.log("getCurrentHeatingCoolingState: " + this.currentHeatingCoolingState);
-                callback(null,this.currentHeatingCoolingState);
-                });
+	            if (currentSettings.System_Status === 0) {
+	              this.currentHeatingCoolingState = Characteristic.CurrentHeatingCoolingState.OFF;
+	            } else if (currentSettings.System_Status === 1) {
+	              this.currentHeatingCoolingState = Characteristic.CurrentHeatingCoolingState.HEAT;
+	            } else if (currentSettings.System_Status === 2) {
+	              this.currentHeatingCoolingState = Characteristic.CurrentHeatingCoolingState.COOL;
+	            }
+                    this.log("getCurrentHeatingCoolingState: " + this.currentHeatingCoolingState);
+                    callback(null,this.currentHeatingCoolingState);
+                  });
 	},
 	getTargetHeatingCoolingState: function(callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber); 
-                if (currentSettings.Operation_Mode === 0) {
-                  this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.OFF;
-                } else if (currentSettings.Operation_Mode === 1) {
-                  this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.HEAT;
-                } else if (currentSettings.Operation_Mode === 2) {
-                  this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.COOL;
-                } else if (currentSettings.Operation_Mode === 3) {
-		  this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.AUTO;
-		}
-                this.log("getTargetHeatingCoolingState: " + this.targetHeatingCoolingState);
-                callback(null,this.targetHeatingCoolingState);
-                });
+                    if (currentSettings.Operation_Mode === 0) {
+                      this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.OFF;
+                    } else if (currentSettings.Operation_Mode === 1) {
+                      this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.HEAT;
+                    } else if (currentSettings.Operation_Mode === 2) {
+                      this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.COOL;
+                    } else if (currentSettings.Operation_Mode === 3) {
+		      this.targetHeatingCoolingState = Characteristic.TargetHeatingCoolingState.AUTO;
+		    }
+                    this.log("getTargetHeatingCoolingState: " + this.targetHeatingCoolingState);
+                    callback(null,this.targetHeatingCoolingState);
+                  });
 	},
 	setTargetHeatingCoolingState: function(value, callback) {
                 var newOptions;
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber); 
-                if (value === 0) {
-                  newOptions = {
-                    Operation_Mode: 0 
-                  };
-                } else if (value === 1) {
-                  newOptions = {
-                    Operation_Mode: 1 
-                  };
-                } else if (value === 2) {
-                  newOptions = {
-                    Operation_Mode: 2
-                  };
-                } else if (value === 3) {
-                  newOptions = {
-                    Operation_Mode: 3
-                  };
-                }
-                const newSettings = Object.assign({}, currentSettings, newOptions);
-                this.icomfort.setThermostatInfo(newSettings);
-		this.log("setTargetHeatingCoolingState-OperationMode: " + newSettings.Operation_Mode);
-		callback(null);
-		});
+                    if (value === 0) {
+                      newOptions = {
+                        Operation_Mode: 0 
+                      };
+                    } else if (value === 1) {
+                      newOptions = {
+                        Operation_Mode: 1 
+                      };
+                    } else if (value === 2) {
+                      newOptions = {
+                        Operation_Mode: 2
+                      };
+                    } else if (value === 3) {
+                      newOptions = {
+                        Operation_Mode: 3
+                      };
+                    }
+                    const newSettings = Object.assign({}, currentSettings, newOptions);
+                    this.icomfort.setThermostatInfo(newSettings);
+		    this.log("setTargetHeatingCoolingState-OperationMode: " + newSettings.Operation_Mode);
+		    callback(null);
+
+                    if (value === 0) {
+                      this.targetTemperature = currentSettings.Cool_Set_Point;
+                    } else if (value === 1) {
+		      this.service.getCharacteristic(Characteristic.TargetTemperature).updateValue(fToC(currentSettings.Heat_Set_Point));
+                    } else if (value === 2) {
+                      this.service.getCharacteristic(Characteristic.TargetTemperature).updateValue(fToC(currentSettings.Cool_Set_Point));
+                    } else if (value === 3) {
+		      this.service.getCharacteristic(Characteristic.CoolingThresholdTemperature).updateValue(fToC(currentSettings.Cool_Set_Point));
+                      this.service.getCharacteristic(Characteristic.HeatingThresholdTemperature).updateValue(fToC(currentSettings.Heat_Set_Point));
+                    }
+		  });
 	},
 	getCurrentTemperature: function(callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber); 
-                this.currentTemperature = currentSettings.Indoor_Temp;
-		this.log("getCurrentTemperature: " + this.currentTemperature);
-                callback(null,fToC(this.currentTemperature));
-                });
+		    this.log("getCurrentTemperature: " + currentSettings.Indoor_Temp);
+                    callback(null,fToC(currentSettings.Indoor_Temp));
+                  });
 	},
 	getTargetTemperature: function(callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber); 
-                if (currentSettings.Operation_Mode === 0) {
-                  this.targetTemperature = currentSettings.Cool_Set_Point;
-                } else if (currentSettings.Operation_Mode === 1) {
-                  this.targetTemperature = currentSettings.Heat_Set_Point;
-                } else if (currentSettings.Operation_Mode === 2) {
-                  this.targetTemperature = currentSettings.Cool_Set_Point;
-                } else if (currentSettings.Operation_Mode === 3) {
-		  this.targetTemperature = currentSettings.Heat_Set_Point + (currentSettings.Cool_Set_Point - currentSettings.Heat_Set_Point) / 2;
-		}
-                this.log("getTargetTemperature: " + this.targetTemperature);
-                callback(null,fToC(this.targetTemperature));
-                });
+                    if (currentSettings.Operation_Mode === 0) {
+                      this.targetTemperature = currentSettings.Cool_Set_Point;
+                    } else if (currentSettings.Operation_Mode === 1) {
+                      this.targetTemperature = currentSettings.Heat_Set_Point;
+                    } else if (currentSettings.Operation_Mode === 2) {
+                      this.targetTemperature = currentSettings.Cool_Set_Point;
+                    } else if (currentSettings.Operation_Mode === 3) {
+		      this.targetTemperature = currentSettings.Indoor_Temp;
+		    }
+                    this.log("getTargetTemperature: " + this.targetTemperature);
+                    callback(null,fToC(this.targetTemperature));
+                  });
 	},
 	setTargetTemperature: function(value,callback) {
                 var newOptions;
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber); 
-                if (currentSettings.Operation_Mode === 0) {
-                  newOptions = {
-                    Cool_Set_Point: cToF(value)
-                  };
-                } else if (currentSettings.Operation_Mode === 1) {
-                  newOptions = {
-                    Heat_Set_Point: cToF(value)
-                  };
-                } else if (currentSettings.Operation_Mode === 2) {
-                  newOptions = {
-                    Cool_Set_Point: cToF(value)
-                  };
-		} 
-                const newSettings = Object.assign({}, currentSettings, newOptions);
-                this.icomfort.setThermostatInfo(newSettings);
-                this.log("setTargetTemperature: " + newSettings.Operation_Mode + " : " + cToF(value));
-		callback(null);
-		});
+                    if (currentSettings.Operation_Mode === 0) {
+                      newOptions = {
+                        Cool_Set_Point: cToF(value)
+                      };
+                    } else if (currentSettings.Operation_Mode === 1) {
+                      newOptions = {
+                        Heat_Set_Point: cToF(value)
+                      };
+                    } else if (currentSettings.Operation_Mode === 2) {
+                      newOptions = {
+                        Cool_Set_Point: cToF(value)
+                      };
+		    } 
+
+		    if (currentSettings.Operation_Mode !== 3){
+                      const newSettings = Object.assign({}, currentSettings, newOptions);
+                      this.icomfort.setThermostatInfo(newSettings);
+                      this.log("setTargetTemperature: " + newSettings.Operation_Mode + " : " + cToF(value));
+		    }
+		    callback(null);
+		  });
 	},
         getTemperatureDisplayUnits: function(callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber); 
-                if (currentSettings.Pref_Temp_Units === "0") { //lennox FARENHEIT
-		  this.temperatureDisplayUnits = 1;
-                } else if (currentSettings.Pref_Temp_Units === "1") { //lennox CELSIUS
-                  this.temperatureDisplayUnits = 0;
-		}
-                this.log("getTemperatureDisplayUnits:" + this.temperatureDisplayUnits); 
-                callback(null, this.temperatureDisplayUnits); 
-		});
+                    if (currentSettings.Pref_Temp_Units === "0") { //lennox FARENHEIT
+		      this.temperatureDisplayUnits = 1;
+                    } else if (currentSettings.Pref_Temp_Units === "1") { //lennox CELSIUS
+                      this.temperatureDisplayUnits = 0;
+		    }
+                    this.log("getTemperatureDisplayUnits:" + this.temperatureDisplayUnits); 
+                    callback(null, this.temperatureDisplayUnits); 
+		  });
         },
-	// Currently doesn't work 
         setTemperatureDisplayUnits: function(value, callback) {
-                var newOptions;
-                this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
-                  .then(res => {
-                    var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber); 
-                if (value === 0) { 
-		  newOptions = {
-		    Pref_Temp_Units: "1"
-		  }; 
-                } else if (value === 1) { 
-		  newOptions = {
-		    Pref_Temp_Units: "0"
-		  };
-                }
-                const newSettings = Object.assign({}, currentSettings, newOptions);
-                this.icomfort.setThermostatInfo(newSettings);
-                this.log("setTemperatureDisplayUnits: " + newSettings.Pref_Temp_Units);
                 callback(null);
-                });
         },
 
 	// Optional Characteristics
@@ -264,59 +259,56 @@ Thermostat.prototype = {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
-                this.currentRelativeHumidity = currentSettings.Indoor_Humidity;
-                this.log("getCurrentRelativeHumidity: " + this.currentRelativeHumidity);
-                callback(null,this.currentRelativeHumidity);
-                });
+                    this.log("getCurrentRelativeHumidity: " + currentSettings.Indoor_Humidity);
+                    callback(null,currentSettings.Indoor_Humidity);
+                  });
 	},
 	getCoolingThresholdTemperature: function(callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
-		this.coolingThresholdTemperature = currentSettings.Cool_Set_Point;
-                this.log("getCoolingThresholdTemperature: " + this.coolingThresholdTemperature);
-                callback(null,fToC(this.coolingThresholdTemperature));
-                });
+                    this.log("getCoolingThresholdTemperature: " + currentSettings.Cool_Set_Point);
+                    callback(null,fToC(currentSettings.Cool_Set_Point));
+                  });
 	},
         setCoolingThresholdTemperature: function(value, callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
-        	this.newCoolingTemp = cToF(value);
-                const newOptions = {
-                  Cool_Set_Point: this.newCoolingTemp,
-		  Heat_Set_Point: this.newHeatingTemp
-                };
-                const newSettings = Object.assign({}, currentSettings, newOptions);
-                this.icomfort.setThermostatInfo(newSettings);
-                this.log("setCoolingThresholdTemperature: " + this.newCoolingTemp);
-                callback(null);
-                });
+		    if (cToF(value) !== currentSettings.Cool_Set_Point){
+                      const newOptions = {
+                        Cool_Set_Point: cToF(value)
+	              };
+       	              const newSettings = Object.assign({}, currentSettings, newOptions);
+	              this.icomfort.setThermostatInfo(newSettings);
+                      this.log("setCoolingThresholdTemperature: " + cToF(value));
+		    }
+                    callback(null);
+                  });
         },
 	getHeatingThresholdTemperature: function(callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
-                this.heatingThresholdTemperature = currentSettings.Heat_Set_Point;
-                this.log("getHeatingThresholdTemperature: " + this.heatingThresholdTemperature);
-                callback(null,fToC(this.heatingThresholdTemperature));
-                });
+                    this.log("getHeatingThresholdTemperature: " + currentSettings.Heat_Set_Point);
+                    callback(null,fToC(currentSettings.Heat_Set_Point));
+                  });
 	},
         setHeatingThresholdTemperature: function(value, callback) {
                 this.icomfort.getThermostatInfoList({GatewaySN: this.gatewaySN, TempUnit: this.temperatureUnits})
                   .then(res => {
                     var currentSettings = res.tStatInfo.find(tStat => tStat.Zone_Number === this.zoneNumber);
-                this.newHeatingTemp = cToF(value);
 
-                const newOptions = {
-                  Cool_Set_Point: this.newCoolingTemp,
-                  Heat_Set_Point: this.newHeatingTemp
-                };
-                const newSettings = Object.assign({}, currentSettings, newOptions);
-                this.icomfort.setThermostatInfo(newSettings);
-                this.log("setHeatingThresholdTemperature: " + this.newHeatingTemp);
-                callback(null);
-                });
+		    if (cToF(value) !== currentSettings.Heat_Set_Point){
+	              const newOptions = {
+	                Heat_Set_Point: cToF(value)
+	              };
+               	      const newSettings = Object.assign({}, currentSettings, newOptions);
+                      this.icomfort.setThermostatInfo(newSettings);
+                      this.log("setHeatingThresholdTemperature: " + cToF(value));
+		    }
+                    callback(null);
+                  });
         },
 	getName: function(callback) {
 		this.log("getName :" + this.name);
@@ -408,17 +400,16 @@ Thermostat.prototype = {
                                 maxValue: 31,
                                 minStep: .1
                         });
-
 		return [informationService, this.service];
 	}
 }
 
 // function to convert Celcius to Farenheit
 function cToF(celsius) {
-  return celsius * 9 / 5 + 32;
+	return Math.round((celsius * 9 / 5) + 32);
 }
 
 // function to convert Farenheit to Celcius
 function fToC(fahrenheit) {
-  return (fahrenheit - 32) * 5 / 9;
+	return ((fahrenheit - 32) * 5 / 9).toFixed(1);
 }
