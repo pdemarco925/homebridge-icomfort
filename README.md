@@ -6,6 +6,8 @@
 
 This is a plugin for [homebridge](https://github.com/nfarina/homebridge) for the Lennox iComfort Thermostat implemented in Java Script.
 
+The plugin works with the [iComfort Wi-Fi](https://www.lennox.com/products/comfort-controls/thermostats/icomfortwi-fi) (controllable online using [My iComfort](https://www.myicomfort.com/)). It probably will *not* work if you have the [iComfort S30/E30/M30](https://www.support.lennoxicomfort.com/help/compare/compare.html) models (controllable online using [Lennox iComfort](https://www.lennoxicomfort.com)).
+
 Update 7/9/2020: Version 2.0.0
 - Temperature rounding fixes, code cleanup and some other minor bug fixes.
 
@@ -32,6 +34,13 @@ Update 3/27/2018: Version 1.0.0
     "zoneNumber": 0
   }
 ```
+
+`"accessory": "iComfortThermostat"` allows homebridge to identify the correct plugin, and should not be changed. You can use an alternate name instead of “Thermostat” if you prefer. 
+
+`USERNAME` and `PASSWORD` should be your My iComfort login information.
+
+You can find the `SERIAL_NUMBER` by logging in to [My iComfort](https://www.myicomfort.com/), selecting the “System” tab, and looking for your Thermostat Serial Number (e.g., XY12Z34567). 
+
 
 ## License
 This work is licensed under the MIT license. See [license](LICENSE) for more details.
