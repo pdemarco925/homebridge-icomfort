@@ -35,6 +35,8 @@ Update 3/27/2018: Version 1.0.0
   }
 ```
 
+`"accessory": "iComfortThermostat"` allows homebridge to identify the correct plugin, and should not be changed. You can use an alternate name instead of “Thermostat” if you prefer. 
+
 `USERNAME` and `PASSWORD` should be your My iComfort login information.
 
 You can find the `SERIAL_NUMBER` by logging in to [My iComfort system](https://www.myicomfort.com/), selecting the “System” tab, and looking for your Thermostat Serial Number (e.g., XY12Z34567).
