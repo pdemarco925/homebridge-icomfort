@@ -6,7 +6,7 @@
 
 This is a plugin for [homebridge](https://github.com/nfarina/homebridge) for the Lennox iComfort Thermostat implemented in Java Script.
 
-The plugin works with the iComfort Wi-Fi (controlable online using the [My iComfort system](https://www.myicomfort.com/). It probably will *not* work if you ahve the iComfort S30/E30/M30 models (controlable online using the [Lennox iComfort system](https://www.lennoxicomfort.com).
+The plugin works with the iComfort Wi-Fi (controllable online using the [My iComfort system](https://www.myicomfort.com/)). It probably will *not* work if you ahve the iComfort S30/E30/M30 models (controllable online using the [Lennox iComfort system](https://www.lennoxicomfort.com)).
 
 Update 7/9/2020: Version 2.0.0
 - Temperature rounding fixes, code cleanup and some other minor bug fixes.
