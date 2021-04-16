@@ -35,6 +35,11 @@ Update 3/27/2018: Version 1.0.0
   }
 ```
 
+`USERNAME` and `PASSWORD` should be your My iComfort login information.
+
+You can find the `SERIAL_NUMBER` by logging in to [My iComfort system](https://www.myicomfort.com/), selecting the “System” tab, and looking for your Thermostat Serial Number (e.g., XY12Z34567).
+
+
 ## License
 This work is licensed under the MIT license. See [license](LICENSE) for more details.
 
